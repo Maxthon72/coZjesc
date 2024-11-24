@@ -1,0 +1,56 @@
+/* Dark Section Background */
+
+.section {
+    padding: 2rem 1.5rem;
+    background-color: #1a1a1a;
+}
+
+
+/* Hero Section */
+
+.notification.is-dark {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+}
+
+.notification {
+    margin-bottom: 2rem;
+}
+
+
+/* Cards */
+
+.card.card-dark {
+    background-color: #252525;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-image img {
+    border-radius: 8px 8px 0 0;
+}
+
+.button {
+    margin-top: 1rem;
+}
+
+.button.is-dark {
+    background-color: #444;
+    color: #ffffff;
+}
+
+.button.is-dark:hover {
+    background-color: #555;
+}
+
+
+/* CTA Section */
+
+.has-text-grey-lighter {
+    color: #c0c0c0;
+}
