@@ -1,7 +1,24 @@
-.section {
+.columns {
     margin-top: 5rem;
+    /* Adds vertical spacing */
+}
+
+.box {
+    background-color: #1a1a1a;
+    /* Matches the dark theme */
+    border-radius: 8px;
+    padding: 2rem;
+    color: #fff;
 }
 
 .title {
-    margin-bottom: 2rem;
+    color: #23d160;
+}
+
+.button {
+    background-color: #23d160;
+}
+
+.button:hover {
+    background-color: #20b050;
 }
