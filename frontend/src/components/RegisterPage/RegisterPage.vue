@@ -4,6 +4,32 @@
       <h1 class="title has-text-centered">Register</h1>
       <form @submit.prevent="handleRegister" class="box">
         <div class="field">
+          <label class="label">First Name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Enter your first name"
+              v-model="first_name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Last Name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Enter your last name"
+              v-model="last_name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
           <label class="label">Username</label>
           <div class="control">
             <input
