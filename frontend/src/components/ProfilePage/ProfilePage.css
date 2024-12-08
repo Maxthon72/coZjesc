@@ -1,13 +1,30 @@
-.container {
-    margin-top: 2rem;
-}
-
 .title {
     margin-bottom: 1rem;
+    color: #333;
+    /* Ensure the title text is dark */
 }
 
 .box {
     background-color: #f5f5f5;
     padding: 1.5rem;
     border-radius: 8px;
+    color: #333;
+    /* Ensure the text inside the box is dark */
+}
+
+.notification {
+    color: #fff;
+    /* Text color for notifications */
+    background-color: #ff3860;
+    /* Default to red for error notifications */
+}
+
+.notification.is-info {
+    background-color: #209cee;
+    /* Blue background for info notifications */
+}
+
+strong {
+    color: #4a4a4a;
+    /* Ensure bold text is dark */
 }
