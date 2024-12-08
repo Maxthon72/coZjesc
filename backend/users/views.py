@@ -5,6 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from .serializers import RegistrationSerializer, LoginSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
@@ -72,7 +73,6 @@ class LoginView(APIView):
         else:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
-from rest_framework.permissions import IsAuthenticated
 
 class CreateStaffUserView(APIView):
     permission_classes = [IsAuthenticated]  # Dostęp tylko dla uwierzytelnionych użytkowników
@@ -130,3 +130,9 @@ class SuperuserLoginView(APIView):
                 return Response({'error': 'User is not a superuser'}, status=status.HTTP_403_FORBIDDEN)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class CheckIfLogedIn(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"logged_in": True}, status=200)
