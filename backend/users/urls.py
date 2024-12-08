@@ -6,6 +6,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('create-staff/', CreateStaffUserView.as_view(), name='create-staff'),
     path('superuser-login/', SuperuserLoginView.as_view(), name='superuser-login'),
-    path('chech-if-loggenin/', CheckIfLogedIn.as_view(), name='chech-if-loggenin'),
+    path('check-if-loggedin/', CheckIfLogedIn.as_view(), name='check-if-loggedin'),
     path('user-info/', UserInfoView.as_view(), name='user-info'),
 ]

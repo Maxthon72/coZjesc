@@ -17,9 +17,9 @@ export default {
                     password: this.password,
                 });
 
-                localStorage.setItem("authToken", response.data.token);
+                localStorage.setItem("authToken", response.data.access);
+                localStorage.setItem("refreshToken", response.data.refresh);
 
-                // Reload the page and redirect to home
                 window.location.reload();
                 this.$router.push("/");
             } catch (error) {
