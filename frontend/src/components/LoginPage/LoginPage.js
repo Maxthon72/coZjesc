@@ -17,13 +17,12 @@ export default {
                     password: this.password,
                 });
 
-                // Store the token in localStorage or Vuex
                 localStorage.setItem("authToken", response.data.token);
 
-                // Redirect to another page or show a success message
-                this.$router.push("/profile");
+                // Reload the page and redirect to home
+                window.location.reload();
+                this.$router.push("/");
             } catch (error) {
-                // Handle errors
                 if (error.response && error.response.data) {
                     this.errorMessage = error.response.data.error || "Invalid credentials";
                 } else {
@@ -31,5 +30,11 @@ export default {
                 }
             }
         },
+    },
+    mounted() {
+        const token = localStorage.getItem("authToken");
+        if (token) {
+            this.$router.push("/"); // Redirect to home if already logged in
+        }
     },
 };
