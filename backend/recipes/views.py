@@ -44,3 +44,20 @@ class RecipeDetailView(APIView):
             return Response({"error": str(e)}, status=500)
 
         return Response(data, status=200)
+    
+class RandomRecipeView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        api_url = "https://api.spoonacular.com/recipes/random"
+        params = {
+            "apiKey": settings.SPOONACULAR_API_KEY,
+            "number": request.query_params.get("number", 1),
+        }
+        try:
+            response = requests.get(api_url, params=params)
+            response.raise_for_status()
+            data = response.json()
+        except requests.exceptions.RequestException as e:
+            return Response({"error": str(e)}, status=500)
+        return Response(data, status=200)
