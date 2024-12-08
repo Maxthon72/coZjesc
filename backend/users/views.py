@@ -136,3 +136,17 @@ class CheckIfLogedIn(APIView):
 
     def get(self, request):
         return Response({"logged_in": True}, status=200)
+    
+class UserInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "is_staff": user.is_staff,
+        })
