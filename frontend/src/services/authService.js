@@ -5,24 +5,21 @@ const axiosInstance = axios.create({
     baseURL: "http://localhost:8000",
 });
 
-const refreshToken = async() => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) {
-        throw new Error("No refresh token found");
-    }
-
+export const refreshToken = async() => {
     try {
-        const response = await axios.post("/api/users/refresh-token/", {
-            refresh: refreshToken,
+        const refresh = localStorage.getItem("refreshToken");
+        if (!refresh) {
+            throw new Error("No refresh token found.");
+        }
+        const response = await axios.post("http://localhost:8000/api/users/refresh-token/", {
+            refresh: refresh,
         });
-        const newAccessToken = response.data.access;
-        localStorage.setItem("authToken", newAccessToken);
-        return newAccessToken;
+        localStorage.setItem("authToken", response.data.access);
+        localStorage.setItem("refreshToken", response.data.refresh);
+        return response.data.access;
     } catch (error) {
         console.error("Error refreshing token:", error);
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("refreshToken");
-        throw new Error("Unable to refresh token. Please log in again.");
+        throw error;
     }
 };
 
@@ -36,6 +33,7 @@ axiosInstance.interceptors.response.use(
 
             try {
                 const newAccessToken = await refreshToken();
+                console.log(newAccessToken);
                 originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
                 return axiosInstance(originalRequest);
             } catch (err) {
