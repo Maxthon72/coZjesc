@@ -14,20 +14,29 @@
       <div v-else class="columns is-multiline">
         <div class="column is-4" v-for="recipe in recipes" :key="recipe.id">
           <div class="card card-dark">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img
-                  :src="recipe.image || 'https://via.placeholder.com/300x200'"
-                  :alt="recipe.title"
-                />
-              </figure>
-            </div>
+            <!-- Image with router-link -->
+            <router-link :to="`/recipe/${recipe.id}`">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img
+                    :src="recipe.image || 'https://via.placeholder.com/300x200'"
+                    :alt="recipe.title"
+                  />
+                </figure>
+              </div>
+            </router-link>
+
+            <!-- Content -->
             <div class="card-content has-background-dark">
-              <p class="title is-5 has-text-light">{{ recipe.title }}</p>
+              <router-link :to="`/recipe/${recipe.id}`" class="title-link">
+                <p class="title is-5 has-text-light">{{ recipe.title }}</p>
+              </router-link>
               <p class="subtitle is-6 has-text-grey-lighter">
                 {{ cleanText(recipe.summary) }}
               </p>
-              <button class="button is-link is-small">Zobacz więcej</button>
+              <router-link :to="`/recipe/${recipe.id}`">
+                <button class="button is-link is-small">Zobacz więcej</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -35,6 +44,7 @@
     </div>
   </section>
 </template>
+
 
 
 <script src="./HomePage.js"></script>

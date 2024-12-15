@@ -1,0 +1,29 @@
+.container {
+    margin-top: 2rem;
+}
+
+.title {
+    color: #333;
+}
+
+.image img {
+    border-radius: 10px;
+}
+
+.box {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+a.button {
+    text-decoration: none;
+}
