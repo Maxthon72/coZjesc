@@ -1,11 +1,28 @@
+import { getRandomRecipes } from "@/services/Spoonly";
+
 export default {
     name: "HomePage",
     data() {
         return {
-            message: "Znajdź swoje ulubione przepisy już teraz!",
+            recipes: [],
+            loading: true,
+            errorMessage: "",
         };
     },
-    mounted() {
-        // Fetch data from backend if necessary
+    methods: {
+        cleanText(text) {
+            if (!text) return "";
+            return text.replace(/<\/?b>/g, "").slice(0, 255) + "...";
+        },
+    },
+    async mounted() {
+        try {
+            const response = await getRandomRecipes(6);
+            this.recipes = response.recipes || [];
+        } catch (error) {
+            this.errorMessage = error.message || "Nie udało się załadować przepisów.";
+        } finally {
+            this.loading = false;
+        }
     },
 };

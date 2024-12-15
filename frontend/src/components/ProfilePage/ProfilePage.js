@@ -1,12 +1,19 @@
-import { checkIfLoggedIn } from "@/services/authService";
+import { checkIfLoggedIn }
+from "@/services/authService";
 import axios from "axios";
+import TempPage from "@/components/TempPage/TempPage.vue";
+
 export default {
     name: "ProfilePage",
+    components: {
+        TempPage,
+    },
     data() {
         return {
             user: null,
             loading: true,
             errorMessage: "",
+            activeTab: "info", // Default active tab
         };
     },
     methods: {
