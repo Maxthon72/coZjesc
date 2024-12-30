@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -31,3 +31,15 @@ class IsRecipeFavoriteView(APIView):
     def get(self, request, recipe_id):
         is_favorite = FavoriteRecipe.objects.filter(user=request.user, recipe_id=recipe_id).exists()
         return Response({'is_favorite': is_favorite})
+    
+class DeleteFavoriteRecipeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, recipe_id):
+        try:
+            # Find the favorite recipe for the logged-in user by recipe_id
+            favorite = FavoriteRecipe.objects.get(user=request.user, recipe_id=recipe_id)
+            favorite.delete()
+            return Response({"detail": "Favorite recipe deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+        except FavoriteRecipe.DoesNotExist:
+            return Response({"detail": "Favorite recipe not found."}, status=status.HTTP_404_NOT_FOUND)
