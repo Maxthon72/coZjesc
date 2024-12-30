@@ -32,4 +32,14 @@ class FavoriteRecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteRecipe
         fields = ['id', 'user', 'recipe_id', 'added_at']
-        read_only_fields = ['id', 'added_at']  # These fields will be automatically populated
+        read_only_fields = ['id', 'user', 'added_at']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        recipe_id = validated_data['recipe_id']
+        
+        # Check if the combination already exists
+        if FavoriteRecipe.objects.filter(user=user, recipe_id=recipe_id).exists():
+            raise serializers.ValidationError("This recipe is already in your favorites.")
+        
+        return super().create(validated_data)

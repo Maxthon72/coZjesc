@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
-
+from django.conf import settings
 
 class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True, help_text="Krótki opis użytkownika")
@@ -31,16 +31,17 @@ class CustomUser(AbstractUser):
 
 class FavoriteRecipe(models.Model):
     user = models.ForeignKey(
-        CustomUser,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="favorite_recipes",
-        help_text="Użytkownik, który dodał przepis do ulubionych"
+        related_name="favorite_recipes"
     )
-    recipe_id = models.CharField(
-        max_length=100,
-        help_text="ID przepisu z zewnętrznego API"
-    )
-    added_at = models.DateTimeField(auto_now_add=True, help_text="Data dodania przepisu do ulubionych")
+    recipe_id = models.CharField(max_length=100)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'recipe_id'], name='unique_user_recipe')
+        ]
 
     def __str__(self):
-        return f"{self.user.username} - Recipe ID: {self.recipe_id}"
+        return f"{self.user.username} - {self.recipe_id}"
