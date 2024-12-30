@@ -70,6 +70,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
+AUTH_USER_MODEL = 'users.CustomUser'
 
 ROOT_URLCONF = 'backend.urls'
 
