@@ -17,13 +17,13 @@
   
           <!-- Summary -->
           <div class="content mb-5">
-            <h2 class="subtitle">Summary</h2>
+            <h2 class="recipy-subtitle">Summary</h2>
             <p v-html="cleanText(recipe.summary)"></p>
           </div>
   
           <!-- Ingredients -->
-          <div class="box mb-5">
-            <h2 class="subtitle">Ingredients</h2>
+          <div class="recipy-box mb-5">
+            <h2 class="recipy-subtitle">Ingredients</h2>
             <ul>
               <li v-for="ingredient in recipe.extendedIngredients" :key="ingredient.id">
                 {{ ingredient.original }}
@@ -32,15 +32,16 @@
           </div>
   
           <!-- Instructions -->
-            <div class="box mb-5">
-                <h2 class="subtitle">Instructions</h2>
+            <div class="recipy-box mb-5">
+                <h2 class="recipy-subtitle">Instructions</h2>
                 <div v-if="recipe.analyzedInstructions && recipe.analyzedInstructions.length">
                     <div v-for="(instruction, index) in recipe.analyzedInstructions" :key="index">
-                    <ol>
-                        <li v-for="(step, stepIndex) in instruction.steps" :key="stepIndex" class="mb-2">
-                        <strong>Step {{ step.number }}:</strong> {{ step.step }}
-                        </li>
-                    </ol>
+                      <div>
+                        <div v-for="(step, stepIndex) in instruction.steps" :key="stepIndex" class="mb-2">
+                            <strong>Step {{ step.number }}:</strong> {{ step.step }}
+                        </div>
+                      </div>
+
                     </div>
                 </div>
                 <div v-else>
@@ -49,8 +50,8 @@
             </div>
   
           <!-- Additional Information -->
-          <div class="box mb-5">
-            <h2 class="subtitle">Additional Information</h2>
+          <div class="recipy-box mb-5">
+            <h2 class="recipy-subtitle">Additional Information</h2>
             <div class="columns">
               <div class="column">
                 <p><strong>Servings:</strong> {{ recipe.servings }}</p>

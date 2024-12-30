@@ -3,16 +3,22 @@
 }
 
 .title {
-    color: #333;
+    color: #23d160;
 }
 
 .image img {
     border-radius: 10px;
 }
 
-.box {
-    background-color: #f9f9f9;
+.recipy-box {
+    background-color: #e4e0e0;
+    padding: 1.5rem;
     border-radius: 8px;
+    color: #333;
+}
+
+.recipy-subtitle {
+    color: darkgreen;
 }
 
 ul {

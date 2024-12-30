@@ -10,7 +10,7 @@
       </div>
 
       <div v-else>
-        <h1 class="title has-text-centered">User Profile</h1>
+        <h1 class="profile-title has-text-centered">User Profile</h1>
         <!-- Tabs -->
         <div class="tabs is-centered is-boxed">
           <ul>
