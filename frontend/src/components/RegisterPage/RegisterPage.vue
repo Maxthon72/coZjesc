@@ -4,7 +4,7 @@
       <h1 class="title has-text-centered">Register</h1>
       <form @submit.prevent="handleRegister" class="box">
         <div class="field">
-          <label class="label">First Name</label>
+          <label class="field-label is-dark">First Name</label>
           <div class="control">
             <input
               class="input"
@@ -17,7 +17,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Last Name</label>
+          <label class="field-label is-dark">Last Name</label>
           <div class="control">
             <input
               class="input"
@@ -30,7 +30,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Username</label>
+          <label class="field-label is-dark">Username</label>
           <div class="control">
             <input
               class="input"
@@ -43,7 +43,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Email</label>
+          <label class="field-label is-dark">Email</label>
           <div class="control">
             <input
               class="input"
@@ -56,7 +56,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
+          <label class="field-label is-dark">Password</label>
           <div class="control">
             <input
               class="input"

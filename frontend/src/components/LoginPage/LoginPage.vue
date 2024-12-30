@@ -7,7 +7,7 @@
           {{ errorMessage }}
         </div>
         <div class="field">
-          <label class="label">Username</label>
+          <label class="field-label is-dark">Username</label>
           <div class="control">
             <input
               class="input"
@@ -20,7 +20,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
+          <label class="field-label is-dark">Password</label>
           <div class="control">
             <input
               class="input"
