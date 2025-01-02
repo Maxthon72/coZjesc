@@ -1,0 +1,23 @@
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-image img {
+    object-fit: cover;
+}
+
+.pagination-link.is-current {
+    background-color: #3273dc;
+    color: white;
+}

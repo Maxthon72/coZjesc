@@ -26,6 +26,9 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div v-if="isLoggedIn" class="buttons">
+              <router-link class="button is-light is-rounded" to="/search-recipes">
+                Search Recipes
+              </router-link>
               <router-link class="button is-light is-rounded" to="/profile">
                 Your Profile
               </router-link>
@@ -45,6 +48,8 @@
 </template>
 
 <script>
+import { checkIfLoggedIn } from "@/services/authService";
+
 export default {
   name: "NavBar",
   data() {
@@ -62,12 +67,21 @@ export default {
       this.isLoggedIn = false;
       this.$router.push("/");
     },
+    async checkLoginStatus() {
+      try {
+        await checkIfLoggedIn(); // Call the authService function
+        this.isLoggedIn = true;
+      } catch (error) {
+        console.error("User is not logged in:", error);
+        this.isLoggedIn = false;
+      }
+    },
   },
-  mounted() {
-    const token = localStorage.getItem("authToken");
-    this.isLoggedIn = !!token;
+  async mounted() {
+    await this.checkLoginStatus(); // Call the new method during the mounted lifecycle hook
   },
 };
+
 </script>
 
 <style scoped>
