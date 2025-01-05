@@ -98,7 +98,6 @@
               </div>
             </div>
 
-
             <!-- Submit Button -->
             <div class="search-field">
               <div class="control">
@@ -117,21 +116,13 @@
           <div v-if="errorMessage" class="notification is-danger">{{ errorMessage }}</div>
 
           <!-- Results -->
-          <div v-if="results.length" class="columns is-multiline">
-            <!-- Loop over paginatedResults to display recipes -->
-            <div
-              v-for="recipe in paginatedResults"
-              :key="recipe.id"
-              class="column is-one-third"
-            >
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img :src="recipe.image" :alt="recipe.title" />
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <p class="title is-5">{{ recipe.title }}</p>
+          <div v-if="results.length">
+            <div v-for="recipe in paginatedResults" :key="recipe.id" class="horizontal-recipe">
+              <div class="recipe-card" @click="goToRecipe(recipe.id)">
+                <img :src="recipe.image" :alt="recipe.title" class="recipe-image" />
+                <div class="recipe-content">
+                  <h2 class="recipe-title">{{ recipe.title }}</h2>
+                  <p class="recipe-description">Click to view details</p>
                 </div>
               </div>
             </div>

@@ -61,5 +61,8 @@ export default {
                 this.loading = false;
             }
         },
+        goToRecipe(recipeId) {
+            this.$router.push({ path: `/recipe/${recipeId}` });
+        },
     },
 };
