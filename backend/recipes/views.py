@@ -8,24 +8,21 @@ class RecipeSearchView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        # Base API URL for Spoonacular
         api_url = "https://api.spoonacular.com/recipes/complexSearch"
 
-        # Get all query parameters provided by the client
         params = request.query_params.dict()
 
-        # Add the Spoonacular API key to the parameters
         params["apiKey"] = settings.SPOONACULAR_API_KEY
 
+        filtered_params = {k: v for k, v in params.items() if v and v != "---"}
+
         try:
-            # Make the GET request to Spoonacular API
-            response = requests.get(api_url, params=params)
-            response.raise_for_status()  # Raise exception for HTTP errors
+            response = requests.get(api_url, params=filtered_params)
+            response.raise_for_status()
             data = response.json()
         except requests.exceptions.RequestException as e:
             return Response({"error": str(e)}, status=500)
 
-        # Return the response data
         return Response(data, status=200)
 
 class RecipeDetailView(APIView):
