@@ -1,7 +1,12 @@
 import { searchRecipes } from "@/services/Spoonly";
-import { cuisines, diets, mealTypes, intolerances } from "@/components/searchPage/searchOptions";
+import { cuisines, diets, mealTypes, intolerances, ingredients } from "@/components/searchPage/searchOptions";
+import Multiselect from "vue-multiselect";
+import "vue-multiselect/dist/vue-multiselect.min.css";
 
 export default {
+    components: {
+        Multiselect,
+    },
     name: "SearchPage",
     data() {
         return {
@@ -9,26 +14,26 @@ export default {
             diet: "",
             mealType: "",
             maxReadyTime: "",
-            number: 10, // Default to 10 recipes
+            number: 10,
             selectedIntolerances: [],
-            results: [], // Search results from the API
+            selectedIngredients: [],
+            results: [],
             loading: false,
             errorMessage: "",
             cuisines,
             diets,
             mealTypes,
             intolerances,
-            currentPage: 1, // Current page number
-            itemsPerPage: 6, // Number of items displayed per page
+            ingredients,
+            currentPage: 1,
+            itemsPerPage: 6,
         };
     },
     computed: {
-        // Dynamically calculate results for the current page
         paginatedResults() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             return this.results.slice(startIndex, startIndex + this.itemsPerPage);
         },
-        // Calculate total number of pages
         totalPages() {
             return Math.ceil(this.results.length / this.itemsPerPage);
         },
@@ -46,13 +51,14 @@ export default {
                 type: this.mealType,
                 maxReadyTime: this.maxReadyTime,
                 intolerances: this.selectedIntolerances.join(","),
-                number: this.number, // Pass the "number" parameter
+                number: this.number,
+                includeIngredients: this.selectedIngredients.map(ingredient => ingredient.name).join(","),
             };
 
             try {
                 const data = await searchRecipes(params);
                 console.log(data);
-                this.results = data.results; // Assign the API results to the `results` array
+                this.results = data.results;
             } catch (error) {
                 console.error("Error searching recipes:", error);
                 this.errorMessage =

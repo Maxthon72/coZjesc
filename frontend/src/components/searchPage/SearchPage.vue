@@ -6,6 +6,24 @@
         <!-- Left Column: Search Options -->
         <div class="column is-one-quarter">
           <form @submit.prevent="searchRecipes" class="box">
+            <!-- Include Ingredients -->
+            <div class="search-field">
+              <label class="label">Include Ingredients</label>
+              <div class="control">
+                <multiselect
+                  v-model="selectedIngredients"
+                  :options="ingredients"
+                  :multiple="true"
+                  :searchable="true"
+                  :close-on-select="false"
+                  placeholder="Search and select ingredients"
+                  label="name"
+                  track-by="name"
+                >
+                </multiselect>
+              </div>
+            </div>
+
             <!-- Cuisine -->
             <div class="search-field">
               <label class="label">Cuisine</label>
@@ -32,27 +50,6 @@
                       {{ option }}
                     </option>
                   </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- Intolerances -->
-            <div class="search-field">
-              <label class="label">Intolerances</label>
-              <div class="control">
-                <div class="checkbox-group">
-                  <label
-                    v-for="option in intolerances"
-                    :key="option"
-                    class="checkbox"
-                  >
-                    <input
-                      type="checkbox"
-                      :value="option"
-                      v-model="selectedIntolerances"
-                    />
-                    {{ option }}
-                  </label>
                 </div>
               </div>
             </div>
@@ -116,8 +113,12 @@
           <div v-if="errorMessage" class="notification is-danger">{{ errorMessage }}</div>
 
           <!-- Results -->
-          <div v-if="results.length">
-            <div v-for="recipe in paginatedResults" :key="recipe.id" class="horizontal-recipe">
+          <div v-if="results.length" class="recipe-list">
+            <div
+              v-for="recipe in paginatedResults"
+              :key="recipe.id"
+              class="horizontal-recipe"
+            >
               <div class="recipe-card" @click="goToRecipe(recipe.id)">
                 <img :src="recipe.image" :alt="recipe.title" class="recipe-image" />
                 <div class="recipe-content">
@@ -166,6 +167,8 @@
     </div>
   </section>
 </template>
+
+
 
 <script src="./SearchPage.js"></script>
 
