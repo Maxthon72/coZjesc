@@ -21,3 +21,7 @@
     background-color: #3273dc;
     color: white;
 }
+
+.search-field label {
+    color: #333;
+}

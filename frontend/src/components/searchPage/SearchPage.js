@@ -2,32 +2,35 @@ import { searchRecipes } from "@/services/Spoonly";
 import { cuisines, diets, mealTypes, intolerances } from "@/components/searchPage/searchOptions";
 
 export default {
-    name: "RecipeSearchPage",
+    name: "SearchPage",
     data() {
         return {
             cuisine: "",
             diet: "",
             mealType: "",
             maxReadyTime: "",
+            number: 10, // Default to 10 recipes
             selectedIntolerances: [],
-            results: [],
+            results: [], // Search results from the API
             loading: false,
             errorMessage: "",
             cuisines,
             diets,
             mealTypes,
             intolerances,
-            currentPage: 1,
-            itemsPerPage: 6,
+            currentPage: 1, // Current page number
+            itemsPerPage: 6, // Number of items displayed per page
         };
     },
     computed: {
-        totalPages() {
-            return Math.ceil(this.results.length / this.itemsPerPage);
-        },
+        // Dynamically calculate results for the current page
         paginatedResults() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             return this.results.slice(startIndex, startIndex + this.itemsPerPage);
+        },
+        // Calculate total number of pages
+        totalPages() {
+            return Math.ceil(this.results.length / this.itemsPerPage);
         },
     },
     methods: {
@@ -43,11 +46,13 @@ export default {
                 type: this.mealType,
                 maxReadyTime: this.maxReadyTime,
                 intolerances: this.selectedIntolerances.join(","),
+                number: this.number, // Pass the "number" parameter
             };
 
             try {
                 const data = await searchRecipes(params);
-                this.results = data.results;
+                console.log(data);
+                this.results = data.results; // Assign the API results to the `results` array
             } catch (error) {
                 console.error("Error searching recipes:", error);
                 this.errorMessage =

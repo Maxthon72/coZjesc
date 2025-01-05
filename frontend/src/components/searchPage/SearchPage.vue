@@ -7,7 +7,7 @@
         <div class="column is-one-quarter">
           <form @submit.prevent="searchRecipes" class="box">
             <!-- Cuisine -->
-            <div class="field">
+            <div class="search-field">
               <label class="label">Cuisine</label>
               <div class="control">
                 <div class="select is-fullwidth">
@@ -22,7 +22,7 @@
             </div>
 
             <!-- Diet -->
-            <div class="field">
+            <div class="search-field">
               <label class="label">Diet</label>
               <div class="control">
                 <div class="select is-fullwidth">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Intolerances -->
-            <div class="field">
+            <div class="search-field">
               <label class="label">Intolerances</label>
               <div class="control">
                 <div class="checkbox-group">
@@ -58,7 +58,7 @@
             </div>
 
             <!-- Meal Type -->
-            <div class="field">
+            <div class="search-field">
               <label class="label">Meal Type</label>
               <div class="control">
                 <div class="select is-fullwidth">
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Max Ready Time -->
-            <div class="field">
+            <div class="search-field">
               <label class="label">Max Ready Time (minutes)</label>
               <div class="control">
                 <input
@@ -85,8 +85,22 @@
               </div>
             </div>
 
+            <!-- Number -->
+            <div class="search-field">
+              <label class="label">Number of Recipes</label>
+              <div class="control">
+                <input
+                  v-model="number"
+                  class="input"
+                  type="number"
+                  placeholder="Enter number of recipes (e.g., 10)"
+                />
+              </div>
+            </div>
+
+
             <!-- Submit Button -->
-            <div class="field">
+            <div class="search-field">
               <div class="control">
                 <button class="button is-primary is-fullwidth" type="submit">
                   Search
@@ -104,6 +118,7 @@
 
           <!-- Results -->
           <div v-if="results.length" class="columns is-multiline">
+            <!-- Loop over paginatedResults to display recipes -->
             <div
               v-for="recipe in paginatedResults"
               :key="recipe.id"
@@ -144,10 +159,7 @@
               Next
             </button>
             <ul class="pagination-list">
-              <li
-                v-for="page in totalPages"
-                :key="page"
-              >
+              <li v-for="page in totalPages" :key="page">
                 <button
                   class="pagination-link"
                   :class="{ 'is-current': currentPage === page }"
