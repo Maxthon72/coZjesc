@@ -116,10 +116,20 @@ export const patchFavoriteRecipe = async(id, updatedData) => {
 
 export const deleteFavoriteRecipe = async(id) => {
     try {
-        const response = await apiClient.delete(`/${id}/`);
+        const response = await apiClient.delete(`/delete/${id}/`);
         return response.data;
     } catch (error) {
         console.error("Error deleting favorite recipe:", error);
+        throw error;
+    }
+};
+
+export const isRecipeFavorite = async(recipeId) => {
+    try {
+        const response = await apiClient.get(`is-favorite/${recipeId}/`);
+        return response.data.is_favorite;
+    } catch (error) {
+        console.error(`Error checking if recipe ${recipeId} is favorite:`, error);
         throw error;
     }
 };

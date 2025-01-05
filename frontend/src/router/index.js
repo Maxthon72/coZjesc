@@ -4,6 +4,7 @@ import LoginPage from '../components/LoginPage/LoginPage.vue';
 import RegisterPage from '../components/RegisterPage/RegisterPage.vue';
 import ProfilePage from '../components/ProfilePage/ProfilePage.vue';
 import RecipePage from '../components/RecipyPage/RecipyPage.vue'
+import RecipeSearchPage from '../components/searchPage/SearchPage.vue'
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
@@ -11,6 +12,7 @@ const routes = [
     { path: '/register', name: 'Register', component: RegisterPage },
     { path: '/profile', name: 'Profile', component: ProfilePage },
     { path: "/recipe/:id", name: "RecipePage", component: RecipePage, },
+    { path: "/search-recipes", component: RecipeSearchPage },
 ];
 
 const router = createRouter({

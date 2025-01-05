@@ -1,6 +1,6 @@
 import { getRecipeById } from "@/services/Spoonly";
 import {
-    getFavoriteRecipes,
+    isRecipeFavorite,
     addFavoriteRecipe,
     deleteFavoriteRecipe,
 } from "@/services/favoriteRecipyService";
@@ -34,10 +34,7 @@ export default {
             try {
                 if (!this.isLoggedIn) return;
 
-                const favorites = await getFavoriteRecipes();
-                this.isFavorite = favorites.some(
-                    (favorite) => favorite.recipe_id === this.recipe.id
-                );
+                this.isFavorite = await isRecipeFavorite(this.recipe.id);
             } catch (error) {
                 console.error("Error checking if recipe is favorite:", error);
             }
@@ -51,14 +48,8 @@ export default {
 
                 if (this.isFavorite) {
                     // Remove from favorites
-                    const favorites = await getFavoriteRecipes();
-                    const favoriteToDelete = favorites.find(
-                        (fav) => fav.recipe_id === this.recipe.id
-                    );
-                    if (favoriteToDelete) {
-                        await deleteFavoriteRecipe(favoriteToDelete.id);
-                        this.isFavorite = false;
-                    }
+                    await deleteFavoriteRecipe(this.recipe.id);
+                    this.isFavorite = false;
                 } else {
                     // Add to favorites
                     await addFavoriteRecipe({ recipe_id: this.recipe.id });
