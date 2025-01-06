@@ -5,8 +5,12 @@ import {
     deleteFavoriteRecipe,
 } from "@/services/favoriteRecipyService";
 import { checkIfLoggedIn } from "@/services/authService";
+import ShoppingListPopup from "@/components/RecipyPage/ShoppingListPopup/ShoppingListPopup.vue";
 
 export default {
+    components: {
+        ShoppingListPopup,
+    },
     name: "RecipePage",
     data() {
         return {
@@ -15,9 +19,14 @@ export default {
             errorMessage: "",
             isFavorite: false,
             isLoggedIn: false,
+            isShoppingListVisible: false,
         };
     },
     methods: {
+        toggleShoppingListPopup() {
+            console.log("vis");
+            this.isShoppingListVisible = !this.isShoppingListVisible;
+        },
         cleanText(text) {
             return text.replace(/<\/?b>/g, "").replace(/<\/?a[^>]*>/g, "");
         },

@@ -26,6 +26,19 @@
           </button>
         </div>
 
+        <!-- Shopping List Button -->
+        <div v-if="isLoggedIn" class="has-text-centered mb-4">
+          <button @click="toggleShoppingListPopup" class="button is-success">
+            Generate Shopping List
+          </button>
+        </div>
+
+        <ShoppingListPopup
+          :ingredients="recipe.extendedIngredients"
+          :isVisible="isShoppingListVisible"
+          @close="toggleShoppingListPopup"
+        />
+
         <!-- Summary -->
         <div class="content mb-5">
           <h2 class="recipy-subtitle">Summary</h2>
