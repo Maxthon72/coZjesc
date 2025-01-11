@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import FavoriteRecipe
 from .serializers import FavoriteRecipeSerializer
+from django.conf import settings
+import requests
 
 class FavoriteRecipeViewSet(viewsets.ModelViewSet):
     queryset = FavoriteRecipe.objects.all()
@@ -43,3 +45,29 @@ class DeleteFavoriteRecipeView(APIView):
             return Response({"detail": "Favorite recipe deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
         except FavoriteRecipe.DoesNotExist:
             return Response({"detail": "Favorite recipe not found."}, status=status.HTTP_404_NOT_FOUND)
+        
+class FavoriteRecipeDetailsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        favorite_recipes = FavoriteRecipe.objects.filter(user=request.user)
+
+        if not favorite_recipes.exists():
+            return Response({"detail": "No favorite recipes found."}, status=200)
+
+        detailed_recipes = []
+        for favorite in favorite_recipes:
+            recipe_id = favorite.recipe_id
+            api_url = f"https://api.spoonacular.com/recipes/{recipe_id}/information"
+            params = {"apiKey": settings.SPOONACULAR_API_KEY}
+
+            try:
+                response = requests.get(api_url, params=params)
+                response.raise_for_status()
+                recipe_data = response.json()
+                detailed_recipes.append(recipe_data)
+            except requests.exceptions.RequestException as e:
+                print(f"Failed to fetch recipe details for ID {recipe_id}: {e}")
+                continue
+
+        return Response(detailed_recipes, status=200)
