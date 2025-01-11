@@ -1,12 +1,13 @@
-import { checkIfLoggedIn }
-from "@/services/authService";
 import axios from "axios";
+import { checkIfLoggedIn } from "@/services/authService";
 import TempPage from "@/components/TempPage/TempPage.vue";
+import FavoriteRecipes from "@/components/ProfilePage/FavoriteRecipTab/FavoriteRecipes.vue";
 
 export default {
     name: "ProfilePage",
     components: {
         TempPage,
+        FavoriteRecipes,
     },
     data() {
         return {

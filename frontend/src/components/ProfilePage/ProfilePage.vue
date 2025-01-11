@@ -20,6 +20,9 @@
             <li :class="{ 'is-active': activeTab === 'temp' }" @click="activeTab = 'temp'">
               <a>Placeholder Page</a>
             </li>
+            <li :class="{ 'is-active': activeTab === 'favorites' }" @click="activeTab = 'favorites'">
+              <a>Favorite Recipes</a>
+            </li>
           </ul>
         </div>
 
@@ -32,6 +35,9 @@
             <p><strong>Last Name:</strong> {{ user.last_name }}</p>
             <p><strong>Staff:</strong> {{ user.is_staff ? "Yes" : "No" }}</p>
           </div>
+          <div v-else-if="activeTab === 'favorites'">
+            <FavoriteRecipes />
+          </div>
           <div v-else-if="activeTab === 'temp'">
             <TempPage />
           </div>
@@ -40,6 +46,6 @@
     </section>
   </div>
 </template>
-<script src="./ProfilePage.js"></script>
 
+<script src="./ProfilePage.js"></script>
 <style src="./ProfilePage.css"></style>
