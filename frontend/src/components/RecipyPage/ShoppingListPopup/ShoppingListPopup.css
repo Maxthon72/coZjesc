@@ -19,6 +19,8 @@
     max-width: 500px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     position: relative;
+    color: black;
+    /* Ensures text color in popup is black */
 }
 
 .close-button {
@@ -29,4 +31,22 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    color: black;
+    /* Ensures close button is visible */
+}
+
+.popup-ingredients-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.popup-label {
+    color: black;
+    /* Ensures labels inside popup are black */
+    font-size: 1rem;
+}
+
+.popup input[type="checkbox"] {
+    margin-right: 8px;
 }

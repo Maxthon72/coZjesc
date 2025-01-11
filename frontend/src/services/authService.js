@@ -24,25 +24,32 @@ export const refreshToken = async() => {
 };
 
 axiosInstance.interceptors.response.use(
-    (response) => response,
+    (response) => response, // Pass the response if no error
     async(error) => {
         const originalRequest = error.config;
 
+        // Check if the error is due to unauthorized access
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
             try {
+                // Refresh the token
                 const newAccessToken = await refreshToken();
-                console.log(newAccessToken);
+                // Set the new token in the headers
                 originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+                // Retry the original request with the new token
                 return axiosInstance(originalRequest);
             } catch (err) {
+                // If the refresh fails, clear storage and redirect to login
                 console.error("Failed to refresh token. Logging out...");
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("refreshToken");
                 window.location.href = "/login";
                 return Promise.reject(err);
             }
         }
 
+        // Return the error if it is not 401 or retry already failed
         return Promise.reject(error);
     }
 );
