@@ -5,7 +5,7 @@ from .user_views import (
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter
-from .favorite_recipes_views import FavoriteRecipeViewSet,IsRecipeFavoriteView,DeleteFavoriteRecipeView
+from .favorite_recipes_views import FavoriteRecipeViewSet,IsRecipeFavoriteView,DeleteFavoriteRecipeView,FavoriteRecipeDetailsView
 
 router = DefaultRouter()
 router.register(r'favorite-recipes', FavoriteRecipeViewSet, basename='favorite-recipe')
@@ -13,6 +13,7 @@ router.register(r'favorite-recipes', FavoriteRecipeViewSet, basename='favorite-r
 urlpatterns = [
     path('favorite-recipes/is-favorite/<str:recipe_id>/', IsRecipeFavoriteView.as_view(), name='is-recipe-favorite'),
     path('favorite-recipes/delete/<str:recipe_id>/', DeleteFavoriteRecipeView.as_view(), name='delete-favorite-recipe'),
+    path('favorite-recipes/details/', FavoriteRecipeDetailsView.as_view(), name='favorite-recipes-details'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('create-staff/', CreateStaffUserView.as_view(), name='create-staff'),
