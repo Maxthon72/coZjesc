@@ -133,3 +133,13 @@ export const isRecipeFavorite = async(recipeId) => {
         throw error;
     }
 };
+
+export const getFavoriteRecipeDetails = async() => {
+    try {
+        const response = await apiClient.get("/details/");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching favorite recipe details:", error);
+        throw error;
+    }
+};
