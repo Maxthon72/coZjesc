@@ -6,22 +6,22 @@
       </div>
 
       <div v-else-if="loading" class="notification is-info">
-        Loading user information...
+        {{ translations.loadingUserInfo }}
       </div>
 
       <div v-else>
-        <h1 class="profile-title has-text-centered">User Profile</h1>
+        <h1 class="profile-title has-text-centered">{{ translations.userProfile }}</h1>
         <!-- Tabs -->
         <div class="tabs is-centered is-boxed">
           <ul>
             <li :class="{ 'is-active': activeTab === 'info' }" @click="activeTab = 'info'">
-              <a>User Info</a>
+              <a>{{ translations.userInfoTab }}</a>
             </li>
             <li :class="{ 'is-active': activeTab === 'temp' }" @click="activeTab = 'temp'">
-              <a>Placeholder Page</a>
+              <a>{{ translations.tempPageTab }}</a>
             </li>
             <li :class="{ 'is-active': activeTab === 'favorites' }" @click="activeTab = 'favorites'">
-              <a>Favorite Recipes</a>
+              <a>{{ translations.favoriteRecipesTab }}</a>
             </li>
           </ul>
         </div>
@@ -29,11 +29,14 @@
         <!-- Tab Content -->
         <div>
           <div v-if="activeTab === 'info'" class="box">
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>First Name:</strong> {{ user.first_name }}</p>
-            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-            <p><strong>Staff:</strong> {{ user.is_staff ? "Yes" : "No" }}</p>
+            <p><strong>{{ translations.username }}:</strong> {{ user.username }}</p>
+            <p><strong>{{ translations.email }}:</strong> {{ user.email }}</p>
+            <p><strong>{{ translations.firstName }}:</strong> {{ user.first_name }}</p>
+            <p><strong>{{ translations.lastName }}:</strong> {{ user.last_name }}</p>
+            <p>
+              <strong>{{ translations.staff }}:</strong>
+              {{ user.is_staff ? translations.yes : translations.no }}
+            </p>
           </div>
           <div v-else-if="activeTab === 'favorites'">
             <FavoriteRecipes />
@@ -46,6 +49,7 @@
     </section>
   </div>
 </template>
+
 
 <script src="./ProfilePage.js"></script>
 <style src="./ProfilePage.css"></style>

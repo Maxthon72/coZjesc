@@ -1,4 +1,5 @@
 import axios from "axios";
+import { languageStore } from "@/stores/languageStore";
 
 export default {
     name: "LoginPage",
@@ -8,6 +9,11 @@ export default {
             password: "",
             errorMessage: "",
         };
+    },
+    computed: {
+        translations() {
+            return languageStore.translations[languageStore.language];
+        },
     },
     methods: {
         async handleLogin() {
@@ -24,9 +30,9 @@ export default {
                 this.$router.push("/");
             } catch (error) {
                 if (error.response && error.response.data) {
-                    this.errorMessage = error.response.data.error || "Invalid credentials";
+                    this.errorMessage = error.response.data.error || this.translations.invalidCredentials;
                 } else {
-                    this.errorMessage = "An error occurred. Please try again.";
+                    this.errorMessage = this.translations.genericError;
                 }
             }
         },
@@ -34,7 +40,7 @@ export default {
     mounted() {
         const token = localStorage.getItem("authToken");
         if (token) {
-            this.$router.push("/"); // Redirect to home if already logged in
+            this.$router.push("/");
         }
     },
 };

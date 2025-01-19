@@ -1,4 +1,5 @@
 import axios from "axios";
+import { languageStore } from "@/stores/languageStore";
 
 export default {
     name: "RegisterPage",
@@ -11,6 +12,11 @@ export default {
             password: "",
         };
     },
+    computed: {
+        translations() {
+            return languageStore.translations[languageStore.language]; // Get translations for the current language
+        },
+    },
     methods: {
         handleRegister() {
             const payload = {
@@ -21,17 +27,15 @@ export default {
                 password: this.password,
             };
 
-            // Send registration data to the backend
             axios
                 .post("http://127.0.0.1:8000/api/users/register/", payload)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Registration successful!");
+                .then(() => {
+                    alert(this.translations.registrationSuccess);
                     this.$router.push("/login");
                 })
                 .catch((error) => {
                     console.error(error);
-                    alert("Registration failed!");
+                    alert(this.translations.registrationFailed);
                 });
         },
     },

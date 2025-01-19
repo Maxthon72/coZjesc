@@ -1,15 +1,15 @@
 <template>
   <div class="columns is-centered is-vcentered is-mobile">
     <div class="column is-half">
-      <h1 class="title has-text-centered">Register</h1>
+      <h1 class="title has-text-centered">{{ translations.registerTitle }}</h1>
       <form @submit.prevent="handleRegister" class="box">
         <div class="field">
-          <label class="field-label is-dark">First Name</label>
+          <label class="field-label is-dark">{{ translations.firstNameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              placeholder="Enter your first name"
+              :placeholder="translations.firstNamePlaceholder"
               v-model="first_name"
               required
             />
@@ -17,12 +17,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">Last Name</label>
+          <label class="field-label is-dark">{{ translations.lastNameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              placeholder="Enter your last name"
+              :placeholder="translations.lastNamePlaceholder"
               v-model="last_name"
               required
             />
@@ -30,12 +30,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">Username</label>
+          <label class="field-label is-dark">{{ translations.usernameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              placeholder="Enter your username"
+              :placeholder="translations.usernamePlaceholder"
               v-model="username"
               required
             />
@@ -43,12 +43,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">Email</label>
+          <label class="field-label is-dark">{{ translations.emailLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="email"
-              placeholder="Enter your email"
+              :placeholder="translations.emailPlaceholder"
               v-model="email"
               required
             />
@@ -56,12 +56,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">Password</label>
+          <label class="field-label is-dark">{{ translations.passwordLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="password"
-              placeholder="Enter your password"
+              :placeholder="translations.passwordPlaceholder"
               v-model="password"
               required
             />
@@ -71,7 +71,7 @@
         <div class="field">
           <div class="control">
             <button class="button is-primary is-fullwidth" type="submit">
-              Register
+              {{ translations.registerButton }}
             </button>
           </div>
         </div>
@@ -79,6 +79,7 @@
     </div>
   </div>
 </template>
+
 
 <script src="./RegisterPage.js"></script>
 

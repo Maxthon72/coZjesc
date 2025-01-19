@@ -1,18 +1,18 @@
 <template>
   <div class="container is-max-desktop">
     <section class="section">
-      <h1 class="title has-text-centered">Login Page</h1>
+      <h1 class="title has-text-centered">{{ translations.loginPageTitle }}</h1>
       <form @submit.prevent="handleLogin" class="box">
         <div v-if="errorMessage" class="notification is-danger">
           {{ errorMessage }}
         </div>
         <div class="field">
-          <label class="field-label is-dark">Username</label>
+          <label class="field-label is-dark">{{ translations.usernameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              placeholder="Enter your username"
+              :placeholder="translations.usernamePlaceholder"
               v-model="username"
               required
             />
@@ -20,12 +20,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">Password</label>
+          <label class="field-label is-dark">{{ translations.passwordLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="password"
-              placeholder="Enter your password"
+              :placeholder="translations.passwordPlaceholder"
               v-model="password"
               required
             />
@@ -35,7 +35,7 @@
         <div class="field">
           <div class="control">
             <button class="button is-primary is-fullwidth" type="submit">
-              Login
+              {{ translations.loginButton }}
             </button>
           </div>
         </div>
@@ -43,6 +43,7 @@
     </section>
   </div>
 </template>
+
 
   
   <script src="./LoginPage.js"></script>

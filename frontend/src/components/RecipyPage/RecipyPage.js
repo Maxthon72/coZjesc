@@ -6,6 +6,7 @@ import {
 } from "@/services/favoriteRecipyService";
 import { checkIfLoggedIn } from "@/services/authService";
 import ShoppingListPopup from "@/components/RecipyPage/ShoppingListPopup/ShoppingListPopup.vue";
+import { languageStore } from "@/stores/languageStore";
 
 export default {
     components: {
@@ -22,9 +23,13 @@ export default {
             isShoppingListVisible: false,
         };
     },
+    computed: {
+        translations() {
+            return languageStore.translations[languageStore.language];
+        },
+    },
     methods: {
         toggleShoppingListPopup() {
-            console.log("vis");
             this.isShoppingListVisible = !this.isShoppingListVisible;
         },
         cleanText(text) {
@@ -35,14 +40,12 @@ export default {
                 await checkIfLoggedIn();
                 this.isLoggedIn = true;
             } catch (error) {
-                console.error("User is not logged in:", error);
                 this.isLoggedIn = false;
             }
         },
         async checkIfFavorite() {
             try {
                 if (!this.isLoggedIn) return;
-
                 this.isFavorite = await isRecipeFavorite(this.recipe.id);
             } catch (error) {
                 console.error("Error checking if recipe is favorite:", error);
@@ -50,17 +53,11 @@ export default {
         },
         async toggleFavorite() {
             try {
-                if (!this.isLoggedIn) {
-                    console.warn("User is not logged in. Cannot toggle favorite.");
-                    return;
-                }
-
+                if (!this.isLoggedIn) return;
                 if (this.isFavorite) {
-                    // Remove from favorites
                     await deleteFavoriteRecipe(this.recipe.id);
                     this.isFavorite = false;
                 } else {
-                    // Add to favorites
                     await addFavoriteRecipe({ recipe_id: this.recipe.id });
                     this.isFavorite = true;
                 }
@@ -74,13 +71,10 @@ export default {
         try {
             const response = await getRecipeById(recipeId);
             this.recipe = response;
-
             await this.checkUserLogin();
-
             await this.checkIfFavorite();
         } catch (error) {
-            console.error(error);
-            this.errorMessage = "Failed to load recipe information.";
+            this.errorMessage = this.translations.failedToLoadRecipe;
         } finally {
             this.loading = false;
         }

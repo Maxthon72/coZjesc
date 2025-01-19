@@ -1,4 +1,5 @@
 import { getRandomRecipes } from "@/services/Spoonly";
+import { languageStore } from "@/stores/languageStore";
 
 export default {
     name: "HomePage",
@@ -8,6 +9,11 @@ export default {
             loading: true,
             errorMessage: "",
         };
+    },
+    computed: {
+        translations() {
+            return languageStore.translations[languageStore.language]; // Get translations for the current language
+        },
     },
     methods: {
         cleanText(text) {

@@ -27,18 +27,28 @@
           <div class="navbar-item">
             <div v-if="isLoggedIn" class="buttons">
               <router-link class="button is-light is-rounded" to="/search-recipes">
-                Search Recipes
+                {{ translations.searchRecipes }}
               </router-link>
               <router-link class="button is-light is-rounded" to="/profile">
-                Your Profile
+                {{ translations.yourProfile }}
               </router-link>
-              <button class="button is-danger is-rounded" @click="handleLogout">Logout</button>
+              <button class="button is-danger is-rounded" @click="handleLogout">
+                {{ translations.logout }}
+              </button>
+              <button class="button is-light is-rounded" @click="toggleLanguage">
+                {{ language === "en" ? "EN" : "PL" }}
+              </button>
             </div>
             <div v-else class="buttons">
-              <router-link class="button is-light is-rounded" to="/login">Login</router-link>
-              <router-link class="button is-primary is-rounded" to="/register">
-                Register
+              <router-link class="button is-light is-rounded" to="/login">
+                {{ translations.login }}
               </router-link>
+              <router-link class="button is-primary is-rounded" to="/register">
+                {{ translations.register }}
+              </router-link>
+              <button class="button is-light is-rounded" @click="toggleLanguage">
+                {{ language === "en" ? "EN" : "PL" }}
+              </button>
             </div>
           </div>
         </div>
@@ -47,7 +57,9 @@
   </nav>
 </template>
 
+
 <script>
+import { languageStore } from "@/stores/languageStore";
 import { checkIfLoggedIn } from "@/services/authService";
 
 export default {
@@ -58,9 +70,20 @@ export default {
       isBurgerActive: false,
     };
   },
+  computed: {
+    language() {
+      return languageStore.language;
+    },
+    translations() {
+      return languageStore.translations[this.language];
+    },
+  },
   methods: {
     toggleBurger() {
       this.isBurgerActive = !this.isBurgerActive;
+    },
+    toggleLanguage() {
+      languageStore.setLanguage(this.language === "en" ? "pl" : "en");
     },
     handleLogout() {
       localStorage.removeItem("authToken");
@@ -69,7 +92,7 @@ export default {
     },
     async checkLoginStatus() {
       try {
-        await checkIfLoggedIn(); // Call the authService function
+        await checkIfLoggedIn();
         this.isLoggedIn = true;
       } catch (error) {
         console.error("User is not logged in:", error);
@@ -78,10 +101,9 @@ export default {
     },
   },
   async mounted() {
-    await this.checkLoginStatus(); // Call the new method during the mounted lifecycle hook
+    await this.checkLoginStatus();
   },
 };
-
 </script>
 
 <style scoped>

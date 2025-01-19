@@ -49,7 +49,6 @@ axiosInstance.interceptors.response.use(
             }
         }
 
-        // Return the error if it is not 401 or retry already failed
         return Promise.reject(error);
     }
 );

@@ -2,11 +2,11 @@
   <section class="section">
     <div class="container">
       <h2 class="title is-3 has-text-light has-text-centered">
-        Wyróżnione przepisy
+        {{ translations.featuredRecipes }}
       </h2>
 
       <div v-if="loading" class="notification is-info">
-        Ładowanie przepisów...
+        {{ translations.loading }}
       </div>
       <div v-else-if="errorMessage" class="notification is-danger">
         {{ errorMessage }}
@@ -35,7 +35,9 @@
                 {{ cleanText(recipe.summary) }}
               </p>
               <router-link :to="`/recipe/${recipe.id}`">
-                <button class="button is-link is-small">Zobacz więcej</button>
+                <button class="button is-link is-small">
+                  {{ translations.viewMore }}
+                </button>
               </router-link>
             </div>
           </div>
@@ -44,8 +46,6 @@
     </div>
   </section>
 </template>
-
-
 
 <script src="./HomePage.js"></script>
 

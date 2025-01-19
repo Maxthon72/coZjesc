@@ -2,6 +2,7 @@ import axios from "axios";
 import { checkIfLoggedIn } from "@/services/authService";
 import TempPage from "@/components/TempPage/TempPage.vue";
 import FavoriteRecipes from "@/components/ProfilePage/FavoriteRecipTab/FavoriteRecipes.vue";
+import { languageStore } from "@/stores/languageStore";
 
 export default {
     name: "ProfilePage",
@@ -14,14 +15,19 @@ export default {
             user: null,
             loading: true,
             errorMessage: "",
-            activeTab: "info", // Default active tab
+            activeTab: "info",
         };
+    },
+    computed: {
+        translations() {
+            return languageStore.translations[languageStore.language];
+        },
     },
     methods: {
         async getUserInfo() {
             const token = localStorage.getItem("authToken");
             if (!token) {
-                throw new Error("No token found");
+                throw new Error(this.translations.noTokenError);
             }
 
             const response = await axios.get("http://localhost:8000/api/users/user-info/", {
@@ -41,7 +47,7 @@ export default {
                 this.user = await this.getUserInfo();
             }
         } catch (error) {
-            this.errorMessage = error.error || "Failed to load user information.";
+            this.errorMessage = error.response.data.detail || this.translations.userInfoError;
         } finally {
             this.loading = false;
         }
