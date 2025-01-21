@@ -55,11 +55,7 @@
 
 4. Uruchomienie
 
--Korzystając z Dockera
+   -Korzystając z Dockera
 
       ```bash
       docker-compose up --build
-
--Bez docker
-
-      ```bash
