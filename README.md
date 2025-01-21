@@ -55,7 +55,7 @@
 
 3. Uruchomienie
 
-   -Korzystając z Dockera
+   - Korzystając z Dockera
 
       W głównym katalogu projektu
       ```bash
@@ -63,7 +63,7 @@
       ```
 
       
-   -Bez dockera
+   - Bez dockera
    
       W katalogu backend
       ```bash
