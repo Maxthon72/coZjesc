@@ -53,13 +53,27 @@
    SUPERUSER_EMAIL=
    SUPERUSER_PASSWORD=
 
-4. Uruchomienie
+3. Uruchomienie
 
    Korzystając z Dockera
 
+      W głównym katalogu projektu
       ```bash
       docker-compose up --build
+      ```
 
       
    Bez dockera
    
+      W katalogu backend
+      ```bash
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py runserver
+      ```
+
+      W katalogo frontend
+      ```bash
+      npm install
+      npm run serve
+      ```
