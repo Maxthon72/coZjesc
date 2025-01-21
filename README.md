@@ -18,12 +18,15 @@
 - **Personalizacja profilu** użytkownika z możliwością dodania preferencji dietetycznych.
 - **Obsługa ciemnego trybu** dla lepszego komfortu użytkowania.
 
-## Wymagania systemowe
+## Technologie
 
-- Python 3.x
-- Node.js
-- PostgreSQL
-- Klucz API do Spoonacular
+- Backend
+   - Django
+   - PostgreSQL
+   - Klucz Spoonacular API
+- Frontend
+   - Vue.js
+   - Bulma css
 
 ## Instalacja
 
@@ -32,3 +35,31 @@
    ```bash
    git clone https://github.com/twoje-nazwa-użytkownika/co-zjesc.git
    cd co-zjesc
+
+2. Utwórz plik .env w katalogu głównym backendu i wypełnij wymagane:
+
+   ```bash
+   DATABASE_NAME=
+   DATABASE_USER=
+   DATABASE_PASSWORD=
+   DATABASE_HOST=
+   DATABASE_PORT=
+   SPOONACULAR_API_KEY=
+   SECRET_KEY=
+   DEBUG=
+   ALLOWED_HOSTS=
+   
+   SUPERUSER_USERNAME=
+   SUPERUSER_EMAIL=
+   SUPERUSER_PASSWORD=
+
+4. Uruchomienie
+
+-Korzystając z Dockera
+
+      ```bash
+      docker-compose up --build
+
+-Bez docker
+
+      ```bash
