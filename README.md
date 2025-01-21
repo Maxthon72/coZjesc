@@ -2,14 +2,6 @@
 
 "Co Zjeść" to aplikacja webowa, która umożliwia użytkownikom wyszukiwanie przepisów kulinarnych na podstawie dostępnych składników oraz wartości odżywczych. Aplikacja pozwala również na przeglądanie szerokiej bazy przepisów, tworzenie list zakupów oraz personalizację przepisów.
 
-## Technologie
-
-- **Backend**: Django + Django REST Framework
-- **Frontend**: Vue.js
-- **Baza danych**: PostgreSQL
-- **API do przepisów**: Spoonacular API
-- **Hosting**: Azure (Azure App Service, Azure Static Web Apps, Azure Database for PostgreSQL)
-
 ## Funkcje
 
 - **Wyszukiwanie przepisów** na podstawie składników, wartości odżywczych i kategorii dietetycznych.
