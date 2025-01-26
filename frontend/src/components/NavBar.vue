@@ -27,24 +27,24 @@
           <div class="navbar-item">
             <div v-if="isLoggedIn" class="buttons">
               <router-link class="button is-light is-rounded" to="/search-recipes">
-                {{ translations.searchRecipes }}
+                {{ translations.nav.searchRecipes }}
               </router-link>
               <router-link class="button is-light is-rounded" to="/profile">
-                {{ translations.yourProfile }}
+                {{ translations.nav.yourProfile }}
               </router-link>
               <button class="button is-danger is-rounded" @click="handleLogout">
-                {{ translations.logout }}
+                {{ translations.nav.logout }}
               </button>
               <button class="button is-light is-rounded" @click="toggleLanguage">
-                {{ language === "en" ? "EN" : "PL" }}
+                {{ language === "en" ? "PL" : "EN" }}
               </button>
             </div>
             <div v-else class="buttons">
               <router-link class="button is-light is-rounded" to="/login">
-                {{ translations.login }}
+                {{ translations.nav.login }}
               </router-link>
               <router-link class="button is-primary is-rounded" to="/register">
-                {{ translations.register }}
+                {{ translations.nav.register }}
               </router-link>
               <button class="button is-light is-rounded" @click="toggleLanguage">
                 {{ language === "en" ? "EN" : "PL" }}
@@ -61,6 +61,7 @@
 <script>
 import { languageStore } from "@/stores/languageStore";
 import { checkIfLoggedIn } from "@/services/authService";
+import { watch } from "vue";
 
 export default {
   name: "NavBar",
@@ -83,7 +84,9 @@ export default {
       this.isBurgerActive = !this.isBurgerActive;
     },
     toggleLanguage() {
-      languageStore.setLanguage(this.language === "en" ? "pl" : "en");
+      const newLanguage = this.language === "en" ? "pl" : "en";
+      languageStore.setLanguage(newLanguage);
+      console.log(`Language changed to: ${newLanguage}`);
     },
     handleLogout() {
       localStorage.removeItem("authToken");
@@ -101,7 +104,16 @@ export default {
     },
   },
   async mounted() {
+    // Check login status on mount
     await this.checkLoginStatus();
+
+    // Debug watcher to log language changes
+    watch(
+      () => this.language,
+      (newLang, oldLang) => {
+        console.log(`Language changed from ${oldLang} to ${newLang}`);
+      }
+    );
   },
 };
 </script>

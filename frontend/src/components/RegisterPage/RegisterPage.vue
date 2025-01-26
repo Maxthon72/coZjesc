@@ -1,15 +1,15 @@
 <template>
   <div class="columns is-centered is-vcentered is-mobile">
     <div class="column is-half">
-      <h1 class="title has-text-centered">{{ translations.registerTitle }}</h1>
+      <h1 class="title has-text-centered">{{ translations.register.title }}</h1>
       <form @submit.prevent="handleRegister" class="box">
         <div class="field">
-          <label class="field-label is-dark">{{ translations.firstNameLabel }}</label>
+          <label class="field-label is-dark">{{ translations.register.firstNameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              :placeholder="translations.firstNamePlaceholder"
+              :placeholder="translations.register.firstNamePlaceholder"
               v-model="first_name"
               required
             />
@@ -17,12 +17,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">{{ translations.lastNameLabel }}</label>
+          <label class="field-label is-dark">{{ translations.register.lastNameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              :placeholder="translations.lastNamePlaceholder"
+              :placeholder="translations.register.lastNamePlaceholder"
               v-model="last_name"
               required
             />
@@ -30,12 +30,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">{{ translations.usernameLabel }}</label>
+          <label class="field-label is-dark">{{ translations.register.usernameLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="text"
-              :placeholder="translations.usernamePlaceholder"
+              :placeholder="translations.register.usernamePlaceholder"
               v-model="username"
               required
             />
@@ -43,12 +43,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">{{ translations.emailLabel }}</label>
+          <label class="field-label is-dark">{{ translations.register.emailLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="email"
-              :placeholder="translations.emailPlaceholder"
+              :placeholder="translations.register.emailPlaceholder"
               v-model="email"
               required
             />
@@ -56,12 +56,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label is-dark">{{ translations.passwordLabel }}</label>
+          <label class="field-label is-dark">{{ translations.register.passwordLabel }}</label>
           <div class="control">
             <input
               class="input"
               type="password"
-              :placeholder="translations.passwordPlaceholder"
+              :placeholder="translations.register.passwordPlaceholder"
               v-model="password"
               required
             />
@@ -71,7 +71,7 @@
         <div class="field">
           <div class="control">
             <button class="button is-primary is-fullwidth" type="submit">
-              {{ translations.registerButton }}
+              {{ translations.register.button }}
             </button>
           </div>
         </div>
@@ -79,6 +79,7 @@
     </div>
   </div>
 </template>
+
 
 
 <script src="./RegisterPage.js"></script>

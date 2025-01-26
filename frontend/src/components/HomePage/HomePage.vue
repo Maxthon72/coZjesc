@@ -2,14 +2,14 @@
   <section class="section">
     <div class="container">
       <h2 class="title is-3 has-text-light has-text-centered">
-        {{ translations.featuredRecipes }}
+        {{ translations.home.featuredRecipes }}
       </h2>
 
       <div v-if="loading" class="notification is-info">
-        {{ translations.loading }}
+        {{ translations.common.loading }}
       </div>
       <div v-else-if="errorMessage" class="notification is-danger">
-        {{ errorMessage }}
+        {{ translations.common.failedToLoad }}
       </div>
       <div v-else class="columns is-multiline">
         <div class="column is-4" v-for="recipe in recipes" :key="recipe.id">
@@ -36,7 +36,7 @@
               </p>
               <router-link :to="`/recipe/${recipe.id}`">
                 <button class="button is-link is-small">
-                  {{ translations.viewMore }}
+                  {{ translations.home.viewMore }}
                 </button>
               </router-link>
             </div>
@@ -46,6 +46,7 @@
     </div>
   </section>
 </template>
+
 
 <script src="./HomePage.js"></script>
 
